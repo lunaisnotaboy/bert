@@ -1,25 +1,31 @@
+# frozen_string_literal: true
 
 require 'stringio'
-
-$:.unshift File.join(File.dirname(__FILE__), *%w[.. ext])
 
 require 'bert/bert'
 require 'bert/types'
 
-begin
-  # try to load the C extension
+case ENV['BERT_TEST_IMPL']
+when 'C'
   require 'bert/c/decode'
-rescue LoadError
-  # fall back on the pure ruby version
+when 'Ruby'
   require 'bert/decode'
+else
+  begin
+    # Try to load the C extension
+    require 'bert/c/decode'
+  rescue LoadError
+    # Fall back on the pure Ruby version
+    require 'bert/decode'
+  end
 end
 
 require 'bert/encode'
-
 require 'bert/encoder'
+
 require 'bert/decoder'
 
-# Global method for specifying that an array should be encoded as a tuple.
+# TODO: figure out if the global method needs to be, well, global
 def t
   BERT::Tuple
 end

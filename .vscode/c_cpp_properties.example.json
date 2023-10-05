@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "cppStandard": "c++14",
+      "cStandard": "c17",
+      "defines": [],
+      "includePath": [
+        "${workspaceFolder}/ext/bert/c/**"
+      ],
+      "intelliSenseMode": "linux-clang-x64",
+      "name": "Linux"
+    }
+  ],
+  "version": 4
+}

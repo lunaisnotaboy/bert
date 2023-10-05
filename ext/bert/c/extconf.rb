@@ -1,14 +1,7 @@
-# Loads mkmf which is used to make makefiles for Ruby extensions
+# frozen_string_literal: true
+
 require 'mkmf'
 
-# warnings save lives
-$CFLAGS << " -Wall "
+append_cflags('-fvisibility=hidden -Wall')
 
-# Give it a name
-extension_name = 'decode'
-
-# The destination
-dir_config(extension_name)
-
-# Do the work
-create_makefile(extension_name)
+create_makefile('bert/c/decode')
