@@ -588,7 +588,7 @@ static VALUE rb_bert_impl(VALUE klass) {
   return rb_str_new("C", 1);
 }
 
-RUBY_FUNC_EXPORTED void Init_decode() {
+RUBY_FUNC_EXPORTED void Init_decode(void) {
   rb_mBERT = rb_define_module("BERT");
 
   rb_require("mochilo");
