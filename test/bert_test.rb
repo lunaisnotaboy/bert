@@ -39,7 +39,8 @@ class BertTest < Test::Unit::TestCase
       assert BERT.supports?(:v3) || BERT.supports?(:v4)
     end
 
-    %i[v2 v3 v4].each do |v|
+    # TODO: add `v4` back when we support it alongside v3
+    %i[v2 v3].each do |v|
       context "#{v} encoder" do
         setup do
           @old_version = BERT::Encode.version
@@ -55,13 +56,13 @@ class BertTest < Test::Unit::TestCase
         end
 
         should 'decode new format' do
-          pend unless BERT.supports?(v)
+          omit "#{v} skipped" unless BERT.supports?(v)
 
           assert_equal @ruby, BERT.decode(@bert)
         end
 
         should 'roundtrip string and maintain encoding' do
-          pend unless BERT.supports?(v)
+          omit "#{v} skipped" unless BERT.supports?(v)
 
           str = '日本語'.encode('EUC-JP')
 
@@ -72,7 +73,7 @@ class BertTest < Test::Unit::TestCase
         end
 
         should 'roundtrip binary string' do
-          pend unless BERT.supports?(v)
+          omit "#{v} skipped" unless BERT.supports?(v)
 
           str = '日本語'.b
 
@@ -83,19 +84,19 @@ class BertTest < Test::Unit::TestCase
         end
 
         should 'encode' do
-          pend unless BERT.supports?(v)
+          omit "#{v} skipped" unless BERT.supports?(v)
 
           assert_equal @bert, BERT.encode(@ruby)
         end
 
         should 'roundtrip object' do
-          pend unless BERT.supports?(v)
+          omit "#{v} skipped" unless BERT.supports?(v)
 
           assert_equal @ruby, BERT.decode(BERT.encode(@ruby))
         end
 
         should 'encode with buffer' do
-          pend unless BERT.supports?(v)
+          omit "#{v} skipped" unless BERT.supports?(v)
 
           buf = BERT.encode_to_buffer(@ruby)
           io = StringIO.new
@@ -108,13 +109,13 @@ class BertTest < Test::Unit::TestCase
         end
 
         should 'ebin' do
-          pend unless BERT.supports?(v)
+          omit "#{v} skipped" unless BERT.supports?(v)
 
           assert_equal @ebin, BERT.ebin(@bert)
         end
 
         should 'raise on encode when unsupported' do
-          pend if BERT.supports?(v)
+          omit "#{v} skipped" if BERT.supports?(v)
 
           assert_raises do
             BERT.encode_to_buffer(@ruby)
@@ -122,7 +123,7 @@ class BertTest < Test::Unit::TestCase
         end
 
         should 'raise on decode when unsupported' do
-          pend if BERT.supports?(v)
+          omit "#{v} skipped" if BERT.supports?(v)
 
           assert_raises do
             BERT.decode(@bert)
@@ -148,7 +149,7 @@ class BertTest < Test::Unit::TestCase
       dd << t[:a]
       dd << t[:a, :b]
       dd << t[t[:a, 1], t[:b, 2]]
-      # dd << []
+      dd << []
       dd << [:a]
       dd << [:a, 1]
       dd << [[:a, 1], [:b, 2]]

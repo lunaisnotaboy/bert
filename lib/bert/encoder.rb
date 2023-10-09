@@ -10,36 +10,28 @@ module BERT
       return item if Encode.version == :v3 || Encode.version == :v4
 
       case item
-      when Array
-        item.map { |x| convert(x) }
-      when FalseClass
-        t[:bert, :false]
       when Hash
         pairs = []
-
         item.each_pair { |k, v| pairs << t[convert(k), convert(v)] }
-
         t[:bert, :dict, pairs]
-      when Regexp
-        options = []
-        options << :caseless if item.options & Regexp::IGNORECASE > 0
-        options << :extended if item.options & Regexp::EXTENDED > 0
-        options << :multiline if item.options & Regexp::MULTILINE > 0
-
-        t[:bert, :regex, item.source, options]
-      when Time
-        t[
-          :bert,
-          :time,
-          item.to_i / 1_000_000,
-          item.to_i % 1_000_000, item.usec
-        ]
-      when TrueClass
-        t[:bert, :true]
       when Tuple
         Tuple.new(item.map { |x| convert(x) })
+      when Array
+        item.map { |x| convert(x) }
       when nil
         t[:bert, :nil]
+      when TrueClass
+        t[:bert, :true]
+      when FalseClass
+        t[:bert, :false]
+      when Time
+        t[:bert, :time, item.to_i / 1_000_000, item.to_i % 1_000_000, item.usec]
+      when Regexp
+        options = []
+        options << :caseless if (item.options & Regexp::IGNORECASE).positive?
+        options << :extended if (item.options & Regexp::EXTENDED).positive?
+        options << :multiline if (item.options & Regexp::MULTILINE).positive?
+        t[:bert, :regex, item.source, options]
       else
         item
       end

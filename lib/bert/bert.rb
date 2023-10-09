@@ -29,8 +29,8 @@ module BERT
     Encoder.encode_to_buffer(ruby)
   end
 
-  def self.supports?(v)
-    case v
+  def self.supports?(version)
+    case version
     when :v1, :v2
       true
     when :v3

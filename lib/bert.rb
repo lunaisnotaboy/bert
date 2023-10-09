@@ -5,7 +5,7 @@ require 'stringio'
 require 'bert/bert'
 require 'bert/types'
 
-case ENV['BERT_TEST_IMPL']
+case ENV.fetch('BERT_TEST_IMPL', nil)
 when 'C'
   require 'bert/c/decode'
 when 'Ruby'

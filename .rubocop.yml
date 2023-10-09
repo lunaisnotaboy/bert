@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=./rubocop-schema.json
+
+AllCops:
+  Exclude:
+    - ./test/**/*
+    - ./tmp/**/*
+    - ./various/**/*
+  NewCops: enable
+  TargetRubyVersion: 2.6
+
+Lint/BooleanSymbol:
+  Enabled: false
+
+Lint/DeprecatedConstants:
+  Exclude:
+    - ./lib/bert/decode.rb
+    - ./lib/bert/encode.rb
+
+Metrics:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Security/MarshalLoad:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
