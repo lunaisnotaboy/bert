@@ -51,6 +51,7 @@ BERT.decode(bert)
 ## Copyright
 
 Copyright (c) 2009 Tom Preston-Werner
+
 Copyright (c) 2023 Luna Nova
 
 For more information, please see the [`LICENSE`](LICENSE) file.
