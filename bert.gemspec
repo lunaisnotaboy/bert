@@ -16,7 +16,6 @@ Gem::Specification.new do |spec|
   spec.summary = 'BERT serialization for Ruby'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['rubygems_mfa_required'] = 'true'
   spec.metadata['source_code_uri'] = spec.homepage
 
   spec.files = Dir.chdir(__dir__) do
